@@ -37,6 +37,26 @@ class _AddSubScriptionViewState extends State<AddSubScriptionView> {
       body: SingleChildScrollView(
         child: Column(
           children: [
+     // Grid với 4 cột
+      Padding(
+      padding: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.185),
+      child: GridView.builder(
+        padding: const EdgeInsets.symmetric(horizontal: 12.0), // Padding trái phải 10px
+        shrinkWrap: true, // Cho phép GridView hiển thị vừa với chiều cao của các phần tử
+        physics: const NeverScrollableScrollPhysics(), // Vô hiệu hóa cuộn riêng cho Grid
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 4, // 4 cột
+          crossAxisSpacing: 10.0, // Khoảng cách giữa các cột
+          mainAxisSpacing: 8.0, // Khoảng cách giữa các hàng
+          childAspectRatio: 1, // Tỉ lệ chiều rộng/chiều cao của ô
+        ),
+        itemCount: 28, // Số lượng ô trong grid (thay đổi tùy ý)
+        itemBuilder: (context, index) {
+          var item = expenseItems[index];
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Icon có viền tròn màu xám
             Container(
               decoration: BoxDecoration(
                   color: TColor.gray70.withOpacity(0.5),
