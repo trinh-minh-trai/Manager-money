@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class TColor {
   static Color get primary => const Color(0xff5E00F5);
-  static Color get primary500 => const Color(0xff7722FF );
+  static Color get primary500 => const Color(0xff7722FF);
   static Color get primary20 => const Color(0xff924EFF);
   static Color get primary10 => const Color(0xffAD7BFF);
   static Color get primary5 => const Color(0xffC9A7FF);
@@ -28,6 +28,14 @@ class TColor {
   static Color get border => const Color(0xffCFCFFC);
   static Color get primaryText => Colors.white;
   static Color get secondaryText => gray60;
-  
+
+  static Color get yellow => const Color.fromARGB(255, 234, 223, 66);
+  static Color get yellowHeader => const Color(0xffFFDA47);
   static Color get white => Colors.white;
+  static Color get yellowChart => const Color(0xfffadf73);
+  static Color get blueChart => const Color(0xff63c7e0);
+  static Color get redChart => const Color(0xfffa899e);
+  static Color get greenblueChart => const Color(0xff64ccb7);
+  static Color get greenChart => const Color(0xff87d688);
+  static Color get underline => const Color(0xffe3e3e3);
 }

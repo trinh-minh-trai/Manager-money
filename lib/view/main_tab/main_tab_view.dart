@@ -110,9 +110,9 @@ class _MainTabViewState extends State<MainTabView> {
                                 });
                               },
                               icon: Image.asset(
-                                "assets/img/creditcards.png",
-                                width: 20,
-                                height: 20,
+                                "assets/img/noun-person-1683897.png",
+                                width: 40,
+                                height: 40,
                                 color: selectTab == 3
                                     ? TColor.white
                                     : TColor.gray30,
