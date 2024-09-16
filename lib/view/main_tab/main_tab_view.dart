@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trackizer/view/add_subscription/add_subscription_view.dart';
-
+import 'package:trackizer/view/home/home_screen.dart';
 import '../../common/color_extension.dart';
 import '../calender/calender_view.dart';
 import '../card/cards_view.dart';
@@ -18,7 +18,7 @@ class MainTabView extends StatefulWidget {
 class _MainTabViewState extends State<MainTabView> {
   int selectTab = 0;
   PageStorageBucket pageStorageBucket = PageStorageBucket();
-  Widget currentTabView = const HomeView();
+  Widget currentTabView =  HomeScreen();
 
   @override
   void initState() {
@@ -73,7 +73,7 @@ class _MainTabViewState extends State<MainTabView> {
                                     onPressed: () {
                                       setState(() {
                                         selectTab = 0;
-                                        currentTabView = const HomeView();
+                                        currentTabView =  HomeScreen();
                                       });
                                     },
                                     icon: Image.asset(
@@ -177,7 +177,7 @@ class _MainTabViewState extends State<MainTabView> {
                                     onPressed: () {
                                       setState(() {
                                         selectTab = 3;
-                                        currentTabView = const CardsView();
+                                        currentTabView = ProfileScreen();
                                       });
                                     },
                                     icon: Image.asset(
