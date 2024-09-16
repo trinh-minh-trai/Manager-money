@@ -6,135 +6,115 @@ import '../../common_widget/primary_button.dart';
 import '../../common_widget/round_textfield.dart';
 import '../../common_widget/secondary_boutton.dart';
 
-class SignUpView extends StatefulWidget {
-  const SignUpView({super.key});
-
+// Màn hình đăng ký
+class RegisterScreen extends StatefulWidget {
   @override
-  State<SignUpView> createState() => _SignUpViewState();
+  _RegisterScreenState createState() => _RegisterScreenState();
 }
 
-class _SignUpViewState extends State<SignUpView> {
-  TextEditingController txtEmail = TextEditingController();
-  TextEditingController txtPassword = TextEditingController();
+class _RegisterScreenState extends State<RegisterScreen> {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _confirmPasswordController =
+      TextEditingController();
+
+  void _register() {
+    // Xử lý logic đăng ký
+    String username = _usernameController.text;
+    String password = _passwordController.text;
+    String confirmPassword = _confirmPasswordController.text;
+
+    if (password == confirmPassword) {
+      // Đăng ký thành công
+      Navigator.pop(context); // Quay lại màn hình đăng nhập sau khi đăng ký
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          title: Text("Lỗi đăng ký"),
+          content: Text("Mật khẩu xác nhận không khớp!"),
+          actions: [
+            TextButton(
+              child: Text("OK"),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ),
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    var media = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: TColor.gray,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Image.asset("assets/img/app_logo.png",
-                  width: media.width * 0.5, fit: BoxFit.contain),
-              const Spacer(),
-              RoundTextField(
-                title: "E-mail address",
-                controller: txtEmail,
-                keyboardType: TextInputType.emailAddress,
+      appBar: AppBar(
+        title: Text('Đăng ký'),
+        backgroundColor: Colors.yellow[700],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/img/iconregis.png', // Thay bằng đường dẫn tới ảnh logo của bạn
+              height: 350, // Tăng chiều cao logo
+              width: 350, // Tăng chiều rộng logo nếu cần
+            ),
+            // Ô nhập tên đăng nhập
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                labelText: 'Tên đăng nhập',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
+                prefixIcon: Icon(Icons.person),
               ),
-              const SizedBox(
-                height: 15,
+            ),
+
+            SizedBox(height: 16),
+            // Ô nhập mật khẩu
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                labelText: 'Mật khẩu',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0), // Bo góc 25px
+                ),
+                prefixIcon: Icon(Icons.lock),
               ),
-              RoundTextField(
-                title: "Password",
-                controller: txtPassword,
-                obscureText: true,
+              obscureText: true,
+            ),
+            SizedBox(height: 16),
+            // Ô nhập xác nhận mật khẩu
+            TextField(
+              controller: _confirmPasswordController,
+              decoration: InputDecoration(
+                labelText: 'Xác nhận mật khẩu',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(25.0), // Bo góc 25px
+                ),
+                prefixIcon: Icon(Icons.lock),
               ),
-              const SizedBox(
-                height: 20,
+              obscureText: true,
+            ),
+            SizedBox(height: 24),
+            // Nút đăng ký
+            ElevatedButton(
+              onPressed: _register,
+              child: Text('Đăng nhập'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.yellow[700],
+                padding: EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25.0),
+                ),
               ),
-              Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 5,
-                      margin: const EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        color: TColor.gray70,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 5,
-                      margin: const EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        color: TColor.gray70,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 5,
-                      margin: const EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        color: TColor.gray70,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      height: 5,
-                      margin: const EdgeInsets.symmetric(horizontal: 1),
-                      decoration: BoxDecoration(
-                        color: TColor.gray70,
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Text(
-                    "Use 8 or more characters with a mix of letters,\nnumbers & symbols.",
-                    style: TextStyle(color: TColor.gray50, fontSize: 12),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              PrimaryButton(
-                title: "Get started, it's free!",
-                onPressed: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) => const SocialLoginView(),
-                  //   ),
-                  // );
-                },
-              ),
-              const Spacer(),
-              Text(
-                "Do you have already an account?",
-                textAlign: TextAlign.center,
-                style: TextStyle(color: TColor.white, fontSize: 14),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SecondaryButton(
-                title: "Sign in",
-                onPressed: () {
-                   Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const SignInView(),
-                    ),
-                  );
-                },
-              ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
