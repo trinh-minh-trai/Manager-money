@@ -68,7 +68,9 @@ class AuthService {
       return _userFromFirebaseUser(user);
     } catch (e) {
       print(e.toString());
-      return null;
+
+      // Trả về lỗi chi tiết hơn để giúp debug và hiển thị lỗi
+      return e;
     }
   }
 }

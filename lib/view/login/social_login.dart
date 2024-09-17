@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trackizer/view/login/sign_up_view.dart';
-
+import 'package:trackizer/view/login/sign_up_view.dart';
 import '../../common/color_extension.dart';
 import '../../common_widget/secondary_boutton.dart';
 
@@ -16,7 +16,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
   Widget build(BuildContext context) {
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
-     backgroundColor: TColor.gray,
+      backgroundColor: TColor.gray,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
@@ -159,7 +159,7 @@ class _SocialLoginViewState extends State<SocialLoginView> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SignUpView()));
+                          builder: (context) => RegisterScreen()));
                 },
               ),
               const SizedBox(

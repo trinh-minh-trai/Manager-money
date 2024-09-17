@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:trackizer/common/color_extension.dart';
+<<<<<<< HEAD
 import 'package:firebase_database/firebase_database.dart';
 import 'package:trackizer/model/category.dart';
 import 'package:trackizer/model/user-model.dart';
 import 'package:trackizer/service/category.dart';
 import 'package:trackizer/service/database.dart';
+=======
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
 
 import '../../common_widget/custom_arc_painter.dart';
 import '../../common_widget/segment_button.dart';
@@ -22,6 +25,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+<<<<<<< HEAD
   List<Category> _categories = [];
 
   @override
@@ -66,6 +70,11 @@ class _HomeViewState extends State<HomeView> {
       "icon": "assets/img/spotify_logo.png",
       "price": "5.99"
     },
+=======
+  bool isSubscription = true;
+  List subArr = [
+    {"name": "Spotify", "icon": "assets/img/spotify_logo.png", "price": "5.99"},
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
     {
       "name": "YouTube Premium",
       "icon": "assets/img/youtube_logo.png",
@@ -79,6 +88,24 @@ class _HomeViewState extends State<HomeView> {
     {"name": "NetFlix", "icon": "assets/img/netflix_logo.png", "price": "15.00"}
   ];
 
+<<<<<<< HEAD
+=======
+  List bilArr = [
+    {"name": "Spotify", "date": DateTime(2023, 07, 25), "price": "5.99"},
+    {
+      "name": "YouTube Premium",
+      "date": DateTime(2023, 07, 25),
+      "price": "18.99"
+    },
+    {
+      "name": "Microsoft OneDrive",
+      "date": DateTime(2023, 07, 25),
+      "price": "29.99"
+    },
+    {"name": "NetFlix", "date": DateTime(2023, 07, 25), "price": "15.00"}
+  ];
+
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.sizeOf(context);
@@ -90,12 +117,19 @@ class _HomeViewState extends State<HomeView> {
             Container(
               height: media.width * 1.1,
               decoration: BoxDecoration(
+<<<<<<< HEAD
                 color: TColor.gray70.withOpacity(0.5),
                 borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(25),
                   bottomRight: Radius.circular(25),
                 ),
               ),
+=======
+                  color: TColor.gray70.withOpacity(0.5),
+                  borderRadius: const BorderRadius.only(
+                      bottomLeft: Radius.circular(25),
+                      bottomRight: Radius.circular(25))),
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
               child: Stack(
                 alignment: Alignment.center,
                 children: [
@@ -104,6 +138,7 @@ class _HomeViewState extends State<HomeView> {
                     alignment: Alignment.topCenter,
                     children: [
                       Container(
+<<<<<<< HEAD
                         padding: EdgeInsets.only(bottom: media.width * 0.05),
                         width: media.width * 0.72,
                         height: media.width * 0.72,
@@ -111,12 +146,23 @@ class _HomeViewState extends State<HomeView> {
                           painter: CustomArcPainter(end: 220),
                         ),
                       ),
+=======
+                        padding:  EdgeInsets.only(bottom: media.width * 0.05),
+                        width: media.width * 0.72,
+                        height: media.width * 0.72,
+                        child: CustomPaint(
+                          painter: CustomArcPainter(end: 220, ),
+                        ),
+                      ),
+
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                       Padding(
                         padding: const EdgeInsets.only(right: 10),
                         child: Row(
                           children: [
                             Spacer(),
                             IconButton(
+<<<<<<< HEAD
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -132,6 +178,19 @@ class _HomeViewState extends State<HomeView> {
                                 color: TColor.gray30,
                               ),
                             ),
+=======
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              const SettingsView()));
+                                },
+                                icon: Image.asset("assets/img/settings.png",
+                                    width: 25,
+                                    height: 25,
+                                    color: TColor.gray30))
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                           ],
                         ),
                       ),
@@ -140,6 +199,7 @@ class _HomeViewState extends State<HomeView> {
                   Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
+<<<<<<< HEAD
                       SizedBox(height: media.width * 0.05),
                       Image.asset("assets/img/app_logo.png",
                           width: media.width * 0.25, fit: BoxFit.contain),
@@ -162,6 +222,36 @@ class _HomeViewState extends State<HomeView> {
                         ),
                       ),
                       SizedBox(height: media.width * 0.07),
+=======
+                      SizedBox(
+                        height: media.width * 0.05,
+                      ),
+                      Image.asset("assets/img/app_logo.png",
+                          width: media.width * 0.25, fit: BoxFit.contain),
+                       SizedBox(
+                        height: media.width * 0.07,
+                      ),
+                      Text(
+                        "\$1,235",
+                        style: TextStyle(
+                            color: TColor.white,
+                            fontSize: 40,
+                            fontWeight: FontWeight.w700),
+                      ),
+                      SizedBox(
+                        height: media.width * 0.055,
+                      ),
+                      Text(
+                        "This month bills",
+                        style: TextStyle(
+                            color: TColor.gray40,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600),
+                      ),
+                      SizedBox(
+                        height: media.width * 0.07,
+                      ),
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                       InkWell(
                         onTap: () {},
                         child: Container(
@@ -176,6 +266,7 @@ class _HomeViewState extends State<HomeView> {
                           child: Text(
                             "See your budget",
                             style: TextStyle(
+<<<<<<< HEAD
                               color: TColor.white,
                               fontSize: 12,
                               fontWeight: FontWeight.w600,
@@ -183,6 +274,14 @@ class _HomeViewState extends State<HomeView> {
                           ),
                         ),
                       ),
+=======
+                                color: TColor.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      )
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                     ],
                   ),
                   Padding(
@@ -200,7 +299,13 @@ class _HomeViewState extends State<HomeView> {
                                 onPressed: () {},
                               ),
                             ),
+<<<<<<< HEAD
                             const SizedBox(width: 8),
+=======
+                            const SizedBox(
+                              width: 8,
+                            ),
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                             Expanded(
                               child: StatusButton(
                                 title: "Highest subs",
@@ -209,7 +314,13 @@ class _HomeViewState extends State<HomeView> {
                                 onPressed: () {},
                               ),
                             ),
+<<<<<<< HEAD
                             const SizedBox(width: 8),
+=======
+                            const SizedBox(
+                              width: 8,
+                            ),
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                             Expanded(
                               child: StatusButton(
                                 title: "Lowest subs",
@@ -217,12 +328,20 @@ class _HomeViewState extends State<HomeView> {
                                 statusColor: TColor.secondaryG,
                                 onPressed: () {},
                               ),
+<<<<<<< HEAD
                             ),
+=======
+                            )
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                           ],
                         ),
                       ],
                     ),
+<<<<<<< HEAD
                   ),
+=======
+                  )
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                 ],
               ),
             ),
@@ -231,9 +350,13 @@ class _HomeViewState extends State<HomeView> {
               padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               height: 50,
               decoration: BoxDecoration(
+<<<<<<< HEAD
                 color: Colors.black,
                 borderRadius: BorderRadius.circular(15),
               ),
+=======
+                  color: Colors.black, borderRadius: BorderRadius.circular(15)),
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
               child: Row(
                 children: [
                   Expanded(
@@ -257,12 +380,17 @@ class _HomeViewState extends State<HomeView> {
                         });
                       },
                     ),
+<<<<<<< HEAD
                   ),
+=======
+                  )
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
                 ],
               ),
             ),
             if (isSubscription)
               ListView.builder(
+<<<<<<< HEAD
                 padding:
                     const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
                 physics: const NeverScrollableScrollPhysics(),
@@ -323,6 +451,42 @@ class _HomeViewState extends State<HomeView> {
                 },
               ),
             const SizedBox(height: 110),
+=======
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: subArr.length,
+                  itemBuilder: (context, index) {
+                    var sObj = subArr[index] as Map? ?? {};
+
+                    return SubScriptionHomeRow(
+                      sObj: sObj,
+                      onPressed: () {
+
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => SubscriptionInfoView( sObj: sObj ) ));
+                      },
+                    );
+                  }),
+            if (!isSubscription)
+              ListView.builder(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: subArr.length,
+                  itemBuilder: (context, index) {
+                    var sObj = subArr[index] as Map? ?? {};
+
+                    return UpcomingBillRow(
+                      sObj: sObj,
+                      onPressed: () {},
+                    );
+                  }),
+            const SizedBox(
+              height: 110,
+            ),
+>>>>>>> 4ad695b9159466fe0f46fde0e6aeb8ef67ee129a
           ],
         ),
       ),

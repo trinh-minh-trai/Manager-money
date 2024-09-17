@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:trackizer/service/auth.dart';
 import '../../common/color_extension.dart';
@@ -103,7 +104,12 @@ class _SignInState extends State<SignIn> {
                     if (_formKey.currentState?.validate() ?? false) {
                       dynamic result =
                           await _auth.signInWithEmailAndPassword(email, pass);
-                      if (result == null) {
+
+                      // Kiểm tra lỗi trả về thay vì chỉ kiểm tra null
+                      if (result is FirebaseAuthException) {
+                        setState(
+                            () => error = result.message ?? 'Lỗi đăng nhập');
+                      } else if (result == null) {
                         setState(() => error = 'Sai email hoặc mật khẩu');
                       }
                     }

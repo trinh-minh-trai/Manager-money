@@ -6,12 +6,15 @@ import 'package:provider/provider.dart';
 
 class Wrapper extends StatelessWidget {
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     final user = Provider.of<AppUser?>(context);
     print(user);
-    if(user == null)
+    if (user == null) {
+      print('User is null');
       return Authenticate();
-    else
+    } else {
+      print('User not null');
       return MainTabView();
+    }
   }
 }
