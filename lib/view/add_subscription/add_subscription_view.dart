@@ -1,10 +1,46 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:trackizer/common/color_extension.dart';
-import 'package:trackizer/common_widget/primary_button.dart';
-import 'package:trackizer/common_widget/round_textfield.dart';
 
-import '../../common_widget/image_button.dart';
+int selectedIndex = -1; // Chỉ mục được chọn hiện tại
+
+const List<String> chartType = <String>['Chi phí', 'Thu nhập'];
+String selectTab = 'expense';
+final List<Map<String, dynamic>> expenseItems = [
+  {"icon": "assets/img/shopping-cart.png", "name": "Mua sắm"},
+  {"icon": "assets/img/restaurant.png", "name": "Đồ ăn"},
+  {"icon": "assets/img/smartphone.png", "name": "Điện thoại"},
+  {"icon": "assets/img/micro.png", "name": "Giải trí"},
+  {"icon": "assets/img/book.png", "name": "Giáo dục"},
+  {"icon": "assets/img/cosmetics.png", "name": "Sắc đẹp"},
+  {"icon": "assets/img/swimming.png", "name": "Thể thao"},
+  {"icon": "assets/img/people.png", "name": "Xã hội"},
+  {"icon": "assets/img/delivery-truck.png", "name": "Vận tải"},
+  {"icon": "assets/img/tshirt.png", "name": "Quần áo"},
+  {"icon": "assets/img/transport.png", "name": "Xe hơi"},
+  {"icon": "assets/img/wine-glasses.png", "name": "Rượu"},
+  {"icon": "assets/img/box.png", "name": "Thuốc lá"},
+  {"icon": "assets/img/game-controller.png", "name": "Thiết bị điện"},
+  {"icon": "assets/img/airplane.png", "name": "Du lịch"},
+  {"icon": "assets/img/healthy.png", "name": "Sức khỏe"},
+  {"icon": "assets/img/pet.png", "name": "Thú cưng"},
+  {"icon": "assets/img/repair.png", "name": "Sửa chữa"},
+  {"icon": "assets/img/paint-roller.png", "name": "Nhà ở"},
+  {"icon": "assets/img/home.png", "name": "Nhà"},
+  {"icon": "assets/img/gift-card.png", "name": "Qùa tặng"},
+  {"icon": "assets/img/give-money.png", "name": "Quyên góp"},
+  {"icon": "assets/img/fortune-wheel.png", "name": "Vé số"},
+  {"icon": "assets/img/fast-food.png", "name": "Đồ ăn nhẹ"},
+  {"icon": "assets/img/playtime.png", "name": "Trẻ em"},
+  {"icon": "assets/img/vegetable.png", "name": "Rau qủa"},
+  {"icon": "assets/img/orange.png", "name": "Hoa qủa"},
+  {"icon": "assets/img/plus.png", "name": "Cài đặt"},
+  {"icon": "assets/img/money_1.png", "name": "Lương"},
+  {"icon": "assets/img/salary.png", "name": "Đầu tư"},
+  {"icon": "assets/img/back-in-time.png", "name": "Làm thêm"},
+  {"icon": "assets/img/money.png", "name": "Giải thưởng"},
+  {"icon": "assets/img/application.png", "name": "Khác"},
+  {"icon": "assets/img/plus.png", "name": "Cài đặt"},
+];
 
 class AddSubScriptionView extends StatefulWidget {
   const AddSubScriptionView({super.key});
@@ -14,206 +50,340 @@ class AddSubScriptionView extends StatefulWidget {
 }
 
 class _AddSubScriptionViewState extends State<AddSubScriptionView> {
-  TextEditingController txtDescription = TextEditingController();
-
-  List subArr = [
-    {"name": "HBO GO", "icon": "assets/img/hbo_logo.png"},
-    {"name": "Spotify", "icon": "assets/img/spotify_logo.png"},
-    {"name": "YouTube Premium", "icon": "assets/img/youtube_logo.png"},
-    {
-      "name": "Microsoft OneDrive",
-      "icon": "assets/img/onedrive_logo.png",
-    },
-    {"name": "NetFlix", "icon": "assets/img/netflix_logo.png"}
-  ];
-
-  double amountVal = 0.09;
-
   @override
   Widget build(BuildContext context) {
     var media = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor: TColor.gray,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  color: TColor.gray70.withOpacity(0.5),
-                  borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(25),
-                      bottomRight: Radius.circular(25))),
-              child: SafeArea(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Stack(
-                      alignment: Alignment.center,
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            IconButton(
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                },
-                                icon: Image.asset("assets/img/back.png",
-                                    width: 25,
-                                    height: 25,
-                                    color: TColor.gray30))
-                          ],
+      backgroundColor: TColor.white,
+      body: Stack(
+        children: [
+          // Grid với 4 cột
+          Padding(
+            padding: EdgeInsets.only(
+                top: MediaQuery.of(context).size.height * 0.185),
+            child: GridView.builder(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 12.0), // Padding trái phải 10px
+              shrinkWrap:
+                  true, // Cho phép GridView hiển thị vừa với chiều cao của các phần tử
+              physics:
+                  const NeverScrollableScrollPhysics(), // Vô hiệu hóa cuộn riêng cho Grid
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4, // 4 cột
+                crossAxisSpacing: 10.0, // Khoảng cách giữa các cột
+                mainAxisSpacing: 8.0, // Khoảng cách giữa các hàng
+                childAspectRatio: 1, // Tỉ lệ chiều rộng/chiều cao của ô
+              ),
+              // Dựa vào selectTab để hiển thị số lượng item khác nhau
+              itemCount: selectTab == 'expense'
+                  ? 28 // Hiển thị từ 0 đến 27 cho "Chi phí"
+                  : expenseItems.length -
+                      28, // Hiển thị từ 28 đến hết cho "Thu nhập"
+              itemBuilder: (context, index) {
+                // Điều chỉnh chỉ số index dựa vào selectTab
+                var actualIndex = selectTab == 'expense' ? index : index + 28;
+                var item = expenseItems[actualIndex];
+
+                return GestureDetector(
+                  onTap: () {
+                    setState(() {
+                      selectedIndex = actualIndex; // Đánh dấu chỉ mục được chọn
+                    });
+
+                    // Hiển thị bàn phím số để nhập giá trị
+                    _showNumberInputDialog(context, actualIndex);
+                  },
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 48.0,
+                        height: 48.0,
+                        decoration: BoxDecoration(
+                          color: selectedIndex == actualIndex
+                              ? Colors.yellow // Đổi màu khi được chọn
+                              : Color(0xffe6e6e6), // Màu viền xám bình thường
+                          shape: BoxShape.circle,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "New",
-                              style:
-                                  TextStyle(color: TColor.gray30, fontSize: 16),
-                            )
-                          ],
+                        child: ClipOval(
+                          child: SizedBox(
+                            child: Image.asset(
+                              item['icon'],
+                              width: 20.0, // Kích thước ảnh
+                              height: 20.0, // Kích thước ảnh
+                              // fit: BoxFit.cover,
+                              color: selectedIndex == actualIndex
+                                  ? const Color.fromARGB(255, 142, 142,
+                                      142) // Màu đen khi được chọn
+                                  : Color.fromARGB(255, 154, 154,
+                                      154), // Màu xám khi không được chọn
+                              colorBlendMode: selectedIndex == actualIndex
+                                  ? BlendMode.srcIn // Áp dụng màu khi được chọn
+                                  : BlendMode
+                                      .modulate, // Màu xám khi không được chọn
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 8.0),
+                      Text(
+                        item['name'],
+                        softWrap: true,
+                        style: TextStyle(
+                          fontSize: 14.0,
+                          color: Color.fromARGB(255, 62, 62, 62),
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            ),
+          ),
+
+          Positioned(
+            top: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              color: TColor.yellowHeader,
+              height: MediaQuery.of(context).size.height * 0.165,
+              child: Column(
+                children: [
+                  const SizedBox(
+                      height: 40), // Khoảng cách giữa dropdown và các button
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 22.0), // Padding trái phải 10px
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment
+                          .spaceBetween, // Căn đều các widget trong Row
+                      children: [
+                        // Text "Hủy" có gán sự kiện
+                        GestureDetector(
+                          onTap: () {
+                            // Xử lý sự kiện khi nhấn vào "Hủy"
+                            selectedIndex = -1;
+                            Navigator.pop(context); // Quay lại màn hình trước
+                          },
+                          child: const Text(
+                            'Hủy',
+                            style: TextStyle(
+                              fontSize: 16,
+                              color: Colors
+                                  .black, // Bạn có thể thay đổi màu nếu cần
+                            ),
+                          ),
+                        ),
+
+                        // Text "Thêm" ở giữa, font 15 bold
+                        const Text(
+                          'Thêm',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color:
+                                Colors.black, // Bạn có thể thay đổi màu nếu cần
+                          ),
+                        ),
+
+                        // Icon lịch
+                        IconButton(
+                          onPressed: () {
+                            // Xử lý sự kiện khi nhấn vào icon lịch
+                            print("Calendar icon tapped");
+                          },
+                          icon: const Icon(
+                            Icons.calendar_today,
+                            color:
+                                Colors.black, // Bạn có thể thay đổi màu nếu cần
+                          ),
                         ),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 20),
-                      child: Text(
-                        "Add new\n subscription",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                            color: TColor.white,
-                            fontSize: 40,
-                            fontWeight: FontWeight.w700),
-                      ),
-                    ),
-                    SizedBox(
-                      width: media.width,
-                      height: media.width * 0.6,
-                      child: CarouselSlider.builder(
-                        options: CarouselOptions(
-                          autoPlay: false,
-                          aspectRatio: 1,
-                          enlargeCenterPage: true,
-                          enableInfiniteScroll: true,
-                          viewportFraction: 0.65,
-                          enlargeFactor: 0.4,
-                          enlargeStrategy: CenterPageEnlargeStrategy.zoom,
-                        ),
-                        itemCount: subArr.length,
-                        itemBuilder: (BuildContext context, int itemIndex,
-                            int pageViewIndex) {
-                          var sObj = subArr[itemIndex] as Map? ?? {};
+                  ),
 
-                          return Container(
-                            margin: const EdgeInsets.all(10),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Image.asset(
-                                  sObj["icon"],
-                                  width: media.width * 0.4,
-                                  height: media.width * 0.4,
-                                  fit: BoxFit.fitHeight,
-                                ),
-                                const Spacer(),
-                                Text(
-                                  sObj["name"],
-                                  style: TextStyle(
-                                      color: TColor.white,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w600),
-                                )
-                              ],
+                  //fixed header
+                  Padding(
+                    padding: const EdgeInsets.only(
+                        top: 6), // Thêm padding bottom 20px
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              selectedIndex = -1;
+                              selectTab = 'expense'; // Chọn nút "Chi phí"
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: selectTab == 'expense'
+                                ? const Color.fromARGB(
+                                    255, 5, 5, 5) // Nền đen khi được chọn
+                                : const Color(
+                                    0xffFFDA47), // Nền trong suốt khi không được chọn
+                            side: BorderSide(
+                              color: selectTab == 'expense'
+                                  ? const Color.fromARGB(255, 5, 5, 5)
+                                  : Colors.black,
+                              width: 0.5,
                             ),
-                          );
-                        },
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top: 30, left: 20, right: 20),
-              child: RoundTextField(title: "Description", titleAlign: TextAlign.center, controller: txtDescription, )
-
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 40, horizontal: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  ImageButton(
-                    image: "assets/img/minus.png",
-                    onPressed: () {
-
-                      amountVal -= 0.1;
-
-                      if(amountVal < 0) {
-                        amountVal = 0;
-                      }
-
-                      setState(() {
-                        
-                      });
-                    },
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(7.0),
+                                bottomLeft: Radius.circular(7.0),
+                              ),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 17.0,
+                              horizontal: 57.0,
+                            ),
+                          ),
+                          child: Text(
+                            'Chi phí',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: selectTab == 'expense'
+                                  ? const Color.fromARGB(255, 254, 221,
+                                      85) // Chữ vàng khi được chọn
+                                  : Colors.black, // Chữ đen khi không được chọn
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 0),
+                        ElevatedButton(
+                          onPressed: () {
+                            setState(() {
+                              selectedIndex = -1;
+                              selectTab = 'income'; // Chọn nút "Thu nhập"
+                            });
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: selectTab == 'income'
+                                ? const Color.fromARGB(
+                                    255, 5, 5, 5) // Nền đen khi được chọn
+                                : const Color(
+                                    0xffFFDA47), // Nền trong suốt khi không được chọn
+                            side: BorderSide(
+                              color: selectTab == 'income'
+                                  ? const Color.fromARGB(255, 5, 5, 5)
+                                  : Colors.black,
+                              width: 0.5,
+                            ),
+                            shape: const RoundedRectangleBorder(
+                              borderRadius: BorderRadius.only(
+                                topRight: Radius.circular(7.0),
+                                bottomRight: Radius.circular(7.0),
+                              ),
+                            ),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 17.0,
+                              horizontal: 53.0,
+                            ),
+                          ),
+                          child: Text(
+                            'Thu nhập',
+                            style: TextStyle(
+                              fontSize: 15,
+                              color: selectTab == 'income'
+                                  ? const Color.fromARGB(255, 254, 221,
+                                      85) // Chữ vàng khi được chọn
+                                  : Colors.black, // Chữ đen khi không được chọn
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-
-                  Column(
-                    children: [
-                        Text(
-                        "Monthly price",
-                        style: TextStyle(
-                            color: TColor.gray40,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w600),
-                      ),
-
-                     const SizedBox(height: 4,),
-
-                       Text(
-                        "\$${amountVal.toStringAsFixed(2)}",
-                        style: TextStyle(
-                            color: TColor.white,
-                            fontSize: 40,
-                            fontWeight: FontWeight.w700),
-                      ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-
-                      Container(
-                        width: 150,
-                        height: 1,
-                        color: TColor.gray70,
-                      )
-                    ],
-                  ),
-
-                  ImageButton(
-                    image: "assets/img/plus.png",
-                    onPressed: () {
-                      amountVal += 0.1;
-
-                      setState(() {});
-                    },
-                  )
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child:
-                  PrimaryButton(title: "Add this platform", onPressed: () {}),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
+  }
+
+  void _showNumberInputDialog(BuildContext context, int index) {
+    TextEditingController amountController = TextEditingController();
+
+    showModalBottomSheet(
+      isScrollControlled: true, // Cho phép modal mở rộng toàn màn hình nếu cần
+      context: context,
+      builder: (context) {
+        return GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+            setState(() {
+              selectedIndex = -1; // Gán lại selectedIndex khi thoát modal
+            });
+          },
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context)
+                  .viewInsets
+                  .bottom, // Lấy khoảng trống của bàn phím
+            ),
+            child: GestureDetector(
+              onTap: () {}, // Để modal không bị đóng khi nhấn vào nội dung
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                        "Nhập số tiền cho ${expenseItems[index]['name']}",
+                        style: TextStyle(
+                            fontSize: 18.0, fontWeight: FontWeight.bold),
+                      ),
+                      TextField(
+                        controller: amountController,
+                        keyboardType: TextInputType.number,
+                        decoration: InputDecoration(labelText: 'Số tiền'),
+                        onSubmitted: (value) {
+                          // Lưu giá trị sau khi nhập
+                          setState(() {
+                            expenseItems[index]['amount'] =
+                                int.tryParse(value) ?? 0;
+                          });
+                          Navigator.pop(context); // Đóng modal
+                          setState(() {
+                            selectedIndex =
+                                -1; // Gán lại selectedIndex khi thoát modal
+                          });
+                        },
+                      ),
+                      const SizedBox(height: 10),
+                      ElevatedButton(
+                        onPressed: () {
+                          // Lưu giá trị sau khi nhập
+                          setState(() {
+                            expenseItems[index]['amount'] =
+                                int.tryParse(amountController.text) ?? 0;
+                          });
+                          Navigator.pop(context); // Đóng bàn phím số
+                          setState(() {
+                            selectedIndex =
+                                -1; // Gán lại selectedIndex khi thoát modal
+                          });
+                        },
+                        child: Text("Lưu"),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    ).whenComplete(() {
+      // Gán selectedIndex = -1 khi modal đóng, bao gồm cả khi nhấn ra ngoài
+      setState(() {
+        selectedIndex = -1;
+      });
+    });
   }
 }

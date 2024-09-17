@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trackizer/service/auth.dart';
 import '../../common/color_extension.dart';
-import '../../common_widget/primary_button.dart';
-import '../../common_widget/secondary_boutton.dart';
 
 class SignIn extends StatefulWidget {
   final Function toggleView;
