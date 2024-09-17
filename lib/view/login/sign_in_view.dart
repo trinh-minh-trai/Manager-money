@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:trackizer/view/main_tab/main_tab_view.dart';
 import 'package:trackizer/view/login/sign_up_view.dart';
 import 'package:trackizer/view/home/home_screen.dart';
+
 class LoginScreen extends StatefulWidget {
   @override
   _LoginScreenState createState() => _LoginScreenState();
@@ -119,5 +120,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-
-

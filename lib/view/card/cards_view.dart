@@ -1,11 +1,5 @@
-import 'dart:math';
-
-import 'package:calendar_agenda/calendar_agenda.dart';
-import 'package:card_swiper/card_swiper.dart';
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
-import 'package:trackizer/common/color_extension.dart';
-import 'package:trackizer/view/settings/settings_view.dart';
+
 class ProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,12 +14,13 @@ class ProfileScreen extends StatelessWidget {
           // Phần header thông tin người dùng
           Container(
             color: const Color.fromARGB(255, 254, 221, 85),
-            padding: EdgeInsets.all(16),
-            child: Row(
+            padding: const EdgeInsets.all(16),
+            child: const Row(
               children: [
                 // Ảnh đại diện
                 CircleAvatar(
-                  backgroundImage: AssetImage('assets/img/avatar.png'), // Đường dẫn ảnh đại diện của bạn
+                  backgroundImage: AssetImage(
+                      'assets/img/avatar.png'), // Đường dẫn ảnh đại diện của bạn
                   radius: 30,
                 ),
                 SizedBox(width: 16),
@@ -64,7 +59,8 @@ class ProfileScreen extends StatelessWidget {
                 buildMenuItem(
                   icon: Icons.thumb_up_alt_outlined,
                   text: 'Giới thiệu cho bạn bè',
-                  iconColor: Colors.yellow[700]!, // Thêm dấu ! để chỉ định giá trị không null
+                  iconColor: Colors.yellow[
+                      700]!, // Thêm dấu ! để chỉ định giá trị không null
                 ),
                 buildMenuItem(
                   icon: Icons.rate_review_outlined,
@@ -95,27 +91,28 @@ class ProfileScreen extends StatelessWidget {
           BottomNavigationBar(
             backgroundColor: Colors.white,
             selectedItemColor: Colors.yellow[700], // Màu khi mục được chọn
-            unselectedItemColor: Colors.black54,  // Màu khi mục không được chọn
+            unselectedItemColor: Colors.black54, // Màu khi mục không được chọn
             currentIndex: 4, // Tab hiện tại
             onTap: (index) {},
             items: [
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.home),
                 label: 'Trang chủ',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.bar_chart),
                 label: 'Biểu đồ',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.add_circle, size: 40, color: Colors.yellow[700]!),
+                icon: Icon(Icons.add_circle,
+                    size: 40, color: Colors.yellow[700]!),
                 label: '',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.report),
                 label: 'Báo cáo',
               ),
-              BottomNavigationBarItem(
+              const BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Tôi',
               ),
@@ -127,7 +124,10 @@ class ProfileScreen extends StatelessWidget {
   }
 
   // Hàm để xây dựng một mục trong danh sách
-  Widget buildMenuItem({required IconData icon, required String text, required Color iconColor}) {
+  Widget buildMenuItem(
+      {required IconData icon,
+      required String text,
+      required Color iconColor}) {
     return ListTile(
       leading: Icon(
         icon,

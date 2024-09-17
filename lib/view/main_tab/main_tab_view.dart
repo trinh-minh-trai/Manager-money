@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:trackizer/view/add_subscription/add_subscription_view.dart';
+import 'package:trackizer/view/card/cards_view.dart';
 import 'package:trackizer/view/home/home_screen.dart';
 import '../../common/color_extension.dart';
 import '../calender/calender_view.dart';
-import '../card/cards_view.dart';
-import '../home/home_view.dart';
 import '../spending_budgets/spending_budgets_view.dart';
 
 class MainTabView extends StatefulWidget {
@@ -18,7 +17,7 @@ class MainTabView extends StatefulWidget {
 class _MainTabViewState extends State<MainTabView> {
   int selectTab = 0;
   PageStorageBucket pageStorageBucket = PageStorageBucket();
-  Widget currentTabView =  HomeScreen();
+  Widget currentTabView = HomeScreen();
 
   @override
   void initState() {
@@ -47,7 +46,8 @@ class _MainTabViewState extends State<MainTabView> {
                         Container(
                           height: MediaQuery.of(context).size.height * 0.11,
                           decoration: const BoxDecoration(
-                            color: Colors.white, // Màu nền của container được đặt trong BoxDecoration
+                            color: Colors
+                                .white, // Màu nền của container được đặt trong BoxDecoration
                             border: Border(
                               top: BorderSide(
                                 color: Color.fromARGB(255, 217, 217, 217),
@@ -56,24 +56,22 @@ class _MainTabViewState extends State<MainTabView> {
                             ),
                           ),
                         ),
-
-
                         Positioned(
-                          bottom: MediaQuery.of(context).size.width * 0.085, // Padding trên 20px
+                          bottom: MediaQuery.of(context).size.width *
+                              0.085, // Padding trên 20px
                           left: 0, // Đảm bảo nằm đầy đủ trên chiều ngang
                           right: 0, // Đảm bảo nằm đầy đủ trên chiều ngang
-                          child:Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                
-                             Column(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              Column(
                                 // mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
                                     onPressed: () {
                                       setState(() {
                                         selectTab = 0;
-                                        currentTabView =  HomeScreen();
+                                        currentTabView = HomeScreen();
                                       });
                                     },
                                     icon: Image.asset(
@@ -82,7 +80,8 @@ class _MainTabViewState extends State<MainTabView> {
                                       height: 28,
                                       color: selectTab == 0
                                           ? const Color(0xfffadf73)
-                                        : const Color(0xff787878), // Màu đen khi không được chọn
+                                          : const Color(
+                                              0xff787878), // Màu đen khi không được chọn
                                     ),
                                   ),
                                   // const SizedBox(height: 1), // Khoảng cách giữa icon và chữ chú thích
@@ -92,21 +91,23 @@ class _MainTabViewState extends State<MainTabView> {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,
                                       color: selectTab == 0
-                                          ? const Color(0xfffadf73) // Màu vàng khi được chọn
-                                          : const Color(0xff787878), // Màu đen khi không được chọn
+                                          ? const Color(
+                                              0xfffadf73) // Màu vàng khi được chọn
+                                          : const Color(
+                                              0xff787878), // Màu đen khi không được chọn
                                     ),
                                   ),
                                 ],
                               ),
-                            
-                                       Column(
+                              Column(
                                 // mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
                                     onPressed: () {
                                       setState(() {
                                         selectTab = 1;
-                                        currentTabView = const SpendingBudgetsView();
+                                        currentTabView =
+                                            const SpendingBudgetsView();
                                       });
                                     },
                                     icon: Image.asset(
@@ -115,7 +116,8 @@ class _MainTabViewState extends State<MainTabView> {
                                       height: 28,
                                       color: selectTab == 1
                                           ? const Color(0xfffadf73)
-                                        : const Color(0xff787878), // Màu đen khi không được chọn
+                                          : const Color(
+                                              0xff787878), // Màu đen khi không được chọn
                                     ),
                                   ),
                                   // const SizedBox(height: 1), // Khoảng cách giữa icon và chữ chú thích
@@ -125,19 +127,19 @@ class _MainTabViewState extends State<MainTabView> {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,
                                       color: selectTab == 1
-                                        ? const Color(0xfffadf73) // Màu vàng khi được chọn
-                                        : const Color(0xff787878), // Màu đen khi không được chọn
+                                          ? const Color(
+                                              0xfffadf73) // Màu vàng khi được chọn
+                                          : const Color(
+                                              0xff787878), // Màu đen khi không được chọn
                                     ),
                                   ),
                                 ],
                               ),
-
-                            const SizedBox(
-                              width: 50,
-                              height: 50,
-                            ),
-
-                               Column(
+                              const SizedBox(
+                                width: 50,
+                                height: 50,
+                              ),
+                              Column(
                                 // mainAxisSize: MainAxisSize.min,
                                 children: [
                                   IconButton(
@@ -153,7 +155,8 @@ class _MainTabViewState extends State<MainTabView> {
                                       height: 28,
                                       color: selectTab == 2
                                           ? const Color(0xfffadf73)
-                                        : const Color(0xff787878), // Màu đen khi không được chọn
+                                          : const Color(
+                                              0xff787878), // Màu đen khi không được chọn
                                     ),
                                   ),
                                   // const SizedBox(height: 1), // Khoảng cách giữa icon và chữ chú thích
@@ -163,13 +166,14 @@ class _MainTabViewState extends State<MainTabView> {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,
                                       color: selectTab == 2
-                                        ? const Color(0xfffadf73) // Màu vàng khi được chọn
-                                        : const Color(0xff787878), // Màu đen khi không được chọn
+                                          ? const Color(
+                                              0xfffadf73) // Màu vàng khi được chọn
+                                          : const Color(
+                                              0xff787878), // Màu đen khi không được chọn
                                     ),
                                   ),
                                 ],
                               ),
-
                               Column(
                                 // mainAxisSize: MainAxisSize.min,
                                 children: [
@@ -186,7 +190,8 @@ class _MainTabViewState extends State<MainTabView> {
                                       height: 28,
                                       color: selectTab == 3
                                           ? const Color(0xfffadf73)
-                                        : const Color(0xff787878), // Màu đen khi không được chọn
+                                          : const Color(
+                                              0xff787878), // Màu đen khi không được chọn
                                     ),
                                   ),
                                   // const SizedBox(height: 1), // Khoảng cách giữa icon và chữ chú thích
@@ -196,25 +201,24 @@ class _MainTabViewState extends State<MainTabView> {
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,
                                       color: selectTab == 3
-                                        ? const Color(0xfffadf73) // Màu vàng khi được chọn
-                                        : const Color(0xff787878), // Màu đen khi không được chọn
+                                          ? const Color(
+                                              0xfffadf73) // Màu vàng khi được chọn
+                                          : const Color(
+                                              0xff787878), // Màu đen khi không được chọn
                                     ),
                                   ),
                                 ],
                               ),
-
-                          ],
-                        ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
                     InkWell(
-                      onTap: () {
-                      },
+                      onTap: () {},
                       child: Container(
                         margin: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).size.width * 0.12
-                        ),
+                            bottom: MediaQuery.of(context).size.width * 0.12),
                         decoration: BoxDecoration(boxShadow: [
                           BoxShadow(
                               color: TColor.secondary.withOpacity(0.25),
@@ -225,7 +229,7 @@ class _MainTabViewState extends State<MainTabView> {
                           width: 55, // Chiều rộng 50px
                           height: 55, // Chiều cao 50px
                           decoration: const BoxDecoration(
-                            color:  Color(0xffFFDA47), // Màu vàng
+                            color: Color(0xffFFDA47), // Màu vàng
                             shape: BoxShape.circle, // Hình tròn
                           ),
                           child: IconButton(
@@ -235,11 +239,14 @@ class _MainTabViewState extends State<MainTabView> {
                               size: 30, // Kích thước dấu cộng
                             ),
                             onPressed: () {
-                               Navigator.push(context, MaterialPageRoute(builder: (context) => const AddSubScriptionView()) );
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const AddSubScriptionView()));
                             },
                           ),
-                        )
-                        ,
+                        ),
                       ),
                     )
                   ],
@@ -252,7 +259,6 @@ class _MainTabViewState extends State<MainTabView> {
     );
   }
 }
-
 
 class LineAndArcPainter extends CustomPainter {
   @override
